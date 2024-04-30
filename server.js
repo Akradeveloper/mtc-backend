@@ -4,11 +4,11 @@ const express = require("express");
 const cors = require("cors");
 const routes = require("./routes/routes");
 
-const injectSpeedInsights= require('@vercel/speed-insights');
-
-app.use.injectSpeedInsights();
+const { withSpeedInsights } = require("@vercel/speed-insights");
 
 const app = express();
+// Agregar el middleware de Speed Insights
+app.use(withSpeedInsights());
 app.use(cors());
 app.use(express.json());
 
