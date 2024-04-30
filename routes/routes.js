@@ -1,0 +1,34 @@
+const express = require("express");
+const { getTwitchAuthUrl, handleTwitchCallback } = require("../api/authApi");
+const { getTwitchUserInfo, getTwitchUserFollow } = require("../api/userApi");
+
+const router = express.Router();
+
+// Ruta para obtener la URL de autenticación de Twitch
+router.get("/auth/url", (req, res) => {
+  const authUrl = getTwitchAuthUrl();
+  res.json({ authUrl });
+});
+
+// Ruta para manejar el callback de autenticación de Twitch
+router.post("/auth/callback", async (req, res) => {
+  const { code } = req.body;
+  try {
+    const accessToken = await handleTwitchCallback(code);
+    res.json({ accessToken });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.get("/user/info", async (req, res) => {
+  const { accessToken } = req.query;
+  try {
+    const userInfo = await getTwitchUserInfo(accessToken);
+    res.json({ userInfo });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+module.exports = router;
