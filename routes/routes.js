@@ -32,9 +32,9 @@ router.get("/user/info", async (req, res) => {
 });
 
 router.get("/user/follow", async (req, res) => {
-  const { accessToken } = req.query;
+  const { accessToken, user_id } = req.query;
   try {
-    const follower = await getTwitchUserFollow(accessToken);
+    const follower = await getTwitchUserFollow(accessToken, user_id);
     res.json({ follower });
   } catch (error) {
     res.status(500).json({ error: error.message });
