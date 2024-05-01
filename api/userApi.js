@@ -16,6 +16,7 @@ const getTwitchUserInfo = async (accessToken) => {
       login: userData.login,
       name: userData.display_name,
       profilePicture: userData.profile_image_url,
+      fullData: userData,
     };
 
     return userInfo;
