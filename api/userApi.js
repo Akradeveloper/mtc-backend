@@ -47,7 +47,7 @@ const getTwitchUserFollow = async (accessToken, user_id) => {
       }
     );
 
-    const streamsFollowed = response.data.data;
+    const streamsFollowed = response.data;
 
     if (userCode === 200) {
       return true;
