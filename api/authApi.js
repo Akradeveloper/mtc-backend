@@ -5,7 +5,7 @@ const CLIENT_SECRET = process.env.REACT_APP_TWITCH_SECRET_ID;
 const REDIRECT_URI = process.env.REACT_APP_TWITCH_REDIRECT;
 
 const getTwitchAuthUrl = () => {
-  const scopes = ["user_read", "user_subscriptions"];
+  const scopes = ["user_read", "user_subscriptions", "user:read:follows"];
   const scopeString = scopes.join("+");
   return `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=${scopeString}`;
 };
