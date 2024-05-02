@@ -4,7 +4,7 @@ const { CLIENT_ID } = require("./authApi");
 const getTwitchUserInfo = async (accessToken) => {
   try {
     const response = await axios.get(
-      process.env.REACT_APP_TWITCH_API_URL + "/helix/users",
+      process.env.REACT_APP_TWITCH_API_URL + "/users",
       {
         headers: {
           "Client-ID": CLIENT_ID,
