@@ -3,6 +3,7 @@ const axios = require("axios");
 const CLIENT_ID = process.env.REACT_APP_TWITCH_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_TWITCH_SECRET_ID;
 const REDIRECT_URI = process.env.REACT_APP_TWITCH_REDIRECT;
+const STREAM_ID = 50511150;
 
 const getTwitchAuthUrl = () => {
   const scopes = ["user_read", "user_subscriptions", "user:read:follows"];
@@ -67,4 +68,5 @@ module.exports = {
   handleTwitchCallback,
   accessTokenTwitchAPP,
   CLIENT_ID,
+  STREAM_ID,
 };

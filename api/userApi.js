@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { CLIENT_ID } = require("./authApi");
+const { CLIENT_ID, STREAM_ID } = require("./authApi");
 
 const getTwitchUserInfo = async (accessToken) => {
   try {
@@ -48,12 +48,9 @@ const getTwitchUserFollow = async (accessToken, user_id) => {
     );
 
     const streamsFollowed = response.data;
-
-    if (userCode === 200) {
-      return true;
-    } else {
-      return false;
-    }
+    return data.data.some(
+      (broadcaster) => broadcaster.broadcaster_id === STREAM_ID
+    );
   } catch (error) {
     console.error(
       "Error al obtener la información del usuario desde Twitch:",
