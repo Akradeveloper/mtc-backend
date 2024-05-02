@@ -49,7 +49,11 @@ const getTwitchUserFollow = async (accessToken, user_id) => {
 
     const streamsFollowed = response.data.data;
 
-    return streamsFollowed;
+    if (userCode === 200) {
+      return true;
+    } else {
+      return false;
+    }
   } catch (error) {
     console.error(
       "Error al obtener la información del usuario desde Twitch:",

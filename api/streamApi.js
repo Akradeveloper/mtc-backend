@@ -31,6 +31,7 @@ const getAllStreams = async (accessToken) => {
       `${process.env.REACT_APP_TWITCH_API_URL}/streams`,
       {
         headers: {
+          "Client-ID": CLIENT_ID,
           Authorization: `Bearer ${accessToken}`,
         },
       }
@@ -51,6 +52,7 @@ const getStreamsFollowedLive = async (accessToken, user_id) => {
       `${process.env.REACT_APP_TWITCH_API_URL}/streams/followed?user_id=${user_id}`,
       {
         headers: {
+          "Client-ID": CLIENT_ID,
           Authorization: `Bearer ${accessToken}`,
         },
       }
