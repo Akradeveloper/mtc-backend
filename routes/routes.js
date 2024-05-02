@@ -2,6 +2,7 @@ const express = require("express");
 const { getTwitchAuthUrl, handleTwitchCallback } = require("../api/authApi");
 const { getTwitchUserInfo, getTwitchUserFollow } = require("../api/userApi");
 const { checkUserisSub } = require("../api/subscriptionApi");
+const { checkUserisLive, getAllStreams } = require("../api/streamApi");
 const router = express.Router();
 
 // Ruta para obtener la URL de autenticación de Twitch
@@ -46,6 +47,36 @@ router.get("/user/sub", async (req, res) => {
   try {
     const subscriber = await checkUserisSub(accessToken, user_id);
     res.json({ subscriber });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.get("stream/oldStreams", async (req, res) => {
+  const { accessToken } = req.query;
+  try {
+    const oldStreams = await getAllStreams(accessToken);
+    res.json({ oldStreams });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.get("/stream/live", async (req, res) => {
+  const { accessToken } = req.query;
+  try {
+    const isLive = await checkUserisLive(accessToken);
+    res.json({ isLive });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.get("/stream/followed", async (req, res) => {
+  const { accessToken, user_id } = req.query;
+  try {
+    const followedStreams = await getStreamsFollowedLive(accessToken, user_id);
+    res.json({ followedStreams });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

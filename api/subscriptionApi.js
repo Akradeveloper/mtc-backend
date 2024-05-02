@@ -4,7 +4,7 @@ const { CLIENT_ID } = require("./authApi");
 const checkUserisSub = async (accessToken, user_id) => {
   try {
     const response = await axios.get(
-      `https://api.twitch.tv/helix/subscriptions/user?broadcaster_id=50511150&user_id=${user_id}`,
+      `${process.env.REACT_APP_TWITCH_API_URL}+/subscriptions/user?broadcaster_id=50511150&user_id=${user_id}`,
       {
         headers: {
           "Client-ID": CLIENT_ID,

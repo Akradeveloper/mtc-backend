@@ -3,12 +3,15 @@ const { CLIENT_ID } = require("./authApi");
 
 const getTwitchUserInfo = async (accessToken) => {
   try {
-    const response = await axios.get("https://api.twitch.tv/helix/users", {
-      headers: {
-        "Client-ID": CLIENT_ID,
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const response = await axios.get(
+      process.env.REACT_APP_TWITCH_API_URL + "/helix/users",
+      {
+        headers: {
+          "Client-ID": CLIENT_ID,
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
 
     const userData = response.data.data[0];
     const userInfo = {
@@ -35,7 +38,7 @@ const getTwitchUserInfo = async (accessToken) => {
 const getTwitchUserFollow = async (accessToken, user_id) => {
   try {
     const response = await axios.get(
-      `https://api.twitch.tv/helix/users/follows?from-id=${process.env.REACT_APP_ID}&to_id=${user_id}`,
+      `${process.env.REACT_APP_TWITCH_API_URL}/users/follows?from-id=${process.env.REACT_APP_ID}&to_id=${user_id}`,
       {
         headers: {
           "Client-ID": CLIENT_ID,

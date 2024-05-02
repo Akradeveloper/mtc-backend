@@ -1,10 +1,10 @@
 const axios = require("axios");
 const { CLIENT_ID } = require("./authApi");
 
-exports.checkUserisLive = async (accessToken) => {
+const checkUserisLive = async (accessToken) => {
   try {
     const response = await axios.get(
-      `https://api.twitch.tv/helix/streams?user_login=${STREAM}`,
+      `${process.env.REACT_APP_TWITCH_API_URL}/streams?user_login=${STREAM}`,
       {
         headers: {
           "Client-ID": CLIENT_ID,
@@ -24,4 +24,49 @@ exports.checkUserisLive = async (accessToken) => {
     console.error("Error al verificar si el usuario está en vivo:", error);
     return false;
   }
+};
+const getAllStreams = async (accessToken) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_TWITCH_API_URL}/streams`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    const AllStreams = response.data.data;
+
+    return AllStreams;
+  } catch (error) {
+    console.error("Error al verificar si el usuario está en vivo:", error);
+    return false;
+  }
+};
+
+const getStreamsFollowedLive = async (accessToken, user_id) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_TWITCH_API_URL}/streams/followed?user_id=${user_id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    const StreamsLive = response.data.data;
+
+    return StreamsLive;
+  } catch (error) {
+    console.error("Error al verificar si el usuario está en vivo:", error);
+    return false;
+  }
+};
+
+module.exports = {
+  checkUserisLive,
+  getAllStreams,
+  getStreamsFollowedLive,
 };
