@@ -2,7 +2,11 @@ const express = require("express");
 const { getTwitchAuthUrl, handleTwitchCallback } = require("../api/authApi");
 const { getTwitchUserInfo, getTwitchUserFollow } = require("../api/userApi");
 const { checkUserisSub } = require("../api/subscriptionApi");
-const { checkUserisLive, getAllStreams } = require("../api/streamApi");
+const {
+  checkUserisLive,
+  getAllStreams,
+  getStreamsFollowedLive,
+} = require("../api/streamApi");
 const router = express.Router();
 
 // Ruta para obtener la URL de autenticación de Twitch
