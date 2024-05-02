@@ -58,7 +58,7 @@ const getStreamsFollowedLive = async (accessToken, user_id) => {
       }
     );
 
-    const StreamsLive = response;
+    const StreamsLive = response.data;
 
     return StreamsLive;
   } catch (error) {
