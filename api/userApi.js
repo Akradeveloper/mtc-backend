@@ -48,9 +48,7 @@ const getTwitchUserFollow = async (accessToken, user_id) => {
     );
 
     const streamsFollowed = response.data;
-    return data.data.some(
-      (broadcaster) => broadcaster.broadcaster_id === STREAM_ID
-    );
+    return streamsFollowed;
   } catch (error) {
     console.error(
       "Error al obtener la información del usuario desde Twitch:",
